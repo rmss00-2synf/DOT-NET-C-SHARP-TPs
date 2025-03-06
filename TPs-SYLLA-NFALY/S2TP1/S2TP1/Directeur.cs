@@ -4,24 +4,9 @@ using System.Runtime.CompilerServices;
 public class Directeur
 {
     private static GestionEmployes gestionEmployes;
-    //private Directeur(GestionEmployes gestionEmployes)
-    //{
-    //    this.gestionEmployes = gestionEmployes;
-    //}
-    public static bool setGestionEmployes(GestionEmployes gestionEmployess)
+    private Directeur() { }
+    public static bool setGestionEmployes(int action)
     {
-        gestionEmployes = new GestionEmployes();
-        gestionEmployes = gestionEmployess;
-        while (true)
-        {
-            Console.WriteLine("0: Add Employee");
-            Console.WriteLine("1: Get Total Salary");
-            Console.WriteLine("2: Get Average Salary");
-            Console.WriteLine("3: Display Employees");
-            Console.WriteLine("4: Remove Employee");
-            Console.WriteLine("-1: Exit");
-            Console.WriteLine("Choose an action:...");
-            int action = Convert.ToInt32(Console.ReadLine());
             switch (action)
             {
                 case 0:
@@ -56,7 +41,28 @@ public class Directeur
                     Console.WriteLine("Invalid Action");
                     return false;
             }
+        return true;
 
+    }
+
+
+    public static Directeur getInstance()
+    {
+        if (gestionEmployes == null)
+        {
+            gestionEmployes = new GestionEmployes();
+            return new Directeur();
         }
+        return new Directeur();
+    }
+
+    public static Directeur getInstance(GestionEmployes gestionEmploye)
+    {
+        if (gestionEmployes == null)
+        {
+            gestionEmployes = gestionEmploye;
+            return new Directeur();
+        }
+        return new Directeur();
     }
 }
